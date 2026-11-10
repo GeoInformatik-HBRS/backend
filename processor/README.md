@@ -76,7 +76,7 @@ If your system uses `python3` instead of `python`, use `python3` to create the
 virtual environment. Once activated, use `python` for the remaining commands.
 
 FastAPI handles HTTP requests, Uvicorn runs the server, and Pydantic supports
-data validation. Tests use pytest and FastAPI's TestClient, which requires httpx.
+data validation. Tests use pytest and FastAPI's TestClient, which requires httpx2.
 
 ## Start manually
 
