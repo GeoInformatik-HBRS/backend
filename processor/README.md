@@ -38,9 +38,30 @@ processor/
   simple data models when needed.
 - `tests/` contains automated tests.
 
-## Install
+## Quick start
 
-Use Python 3.11 or newer. Run these commands from the repository root:
+Use Python 3.11 or newer, `make`, Linux or macOS. Run these commands from the
+repository root:
+
+```bash
+make local-setup
+make local-run
+```
+
+`make local-setup` creates the virtual environment `processor/.venv` and installs
+`processor/requirements.txt` into it. It uses `python3`; choose another
+interpreter with `make local-setup PYTHON=python3.12`.
+
+`make local-run` starts the app with Uvicorn at `http://127.0.0.1:8000` and
+reloads it when source files change. Change the address with
+`make local-run HOST=0.0.0.0 PORT=8001`. Press `Ctrl+C` to stop it.
+
+The Makefile uses the Linux/macOS virtual environment layout (`.venv/bin`). On
+Windows, use the manual steps below.
+
+## Install manually
+
+Run these commands from the repository root:
 
 ```bash
 cd processor
@@ -55,9 +76,9 @@ If your system uses `python3` instead of `python`, use `python3` to create the
 virtual environment. Once activated, use `python` for the remaining commands.
 
 FastAPI handles HTTP requests, Uvicorn runs the server, and Pydantic supports
-data validation. Tests use pytest and FastAPI's TestClient, which requires httpx2.
+data validation. Tests use pytest and FastAPI's TestClient, which requires httpx.
 
-## Start
+## Start manually
 
 From `processor/`, with the virtual environment activated:
 
@@ -67,6 +88,17 @@ python -m uvicorn src.main:app --reload
 
 The server runs at `http://127.0.0.1:8000`. The `--reload` option restarts it
 when source files change. Press `Ctrl+C` to stop it.
+
+## Frontend access (CORS)
+
+The app allows browser requests from the local Vite dev server at
+`http://localhost:5173` and `http://127.0.0.1:5173`. No other origin is allowed
+by default. To allow different origins, set `CORS_ORIGINS` to a comma-separated
+list before starting the server, for example:
+
+```bash
+CORS_ORIGINS=http://localhost:5174 make local-run
+```
 
 ## Check health
 
@@ -91,8 +123,9 @@ From `processor/`, with the virtual environment activated:
 python -m pytest
 ```
 
-The health test checks the HTTP status and the exact response JSON. It uses
-TestClient, so you do not need to start a server to run it.
+The tests check the health endpoint's HTTP status and exact response JSON, and
+that CORS accepts the local Vite origin. They use TestClient, so you do not need
+to start a server to run them.
 
 ## Add a feature
 
