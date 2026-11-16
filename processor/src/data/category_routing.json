@@ -1,0 +1,32 @@
+{
+  "technical_department": [
+    "street_damage",
+    "broken_streetlight",
+    "damaged_sidewalk"
+  ],
+  "waste_department": [
+    "illegal_waste",
+    "overflowing_public_bin",
+    "litter_in_public_area"
+  ],
+  "parks_department": [
+    "fallen_tree_in_park",
+    "damaged_park_bench",
+    "overgrown_park_path"
+  ],
+  "traffic_department": [
+    "damaged_traffic_sign",
+    "broken_traffic_light",
+    "faded_road_markings"
+  ],
+  "water_department": [
+    "blocked_storm_drain",
+    "leaking_public_pipe",
+    "street_flooding"
+  ],
+  "public_facilities_department": [
+    "broken_playground_equipment",
+    "damaged_bus_stop",
+    "broken_public_toilet"
+  ]
+}
