@@ -1,0 +1,2 @@
+import pytest
+from processor.src.use_cases.category_routing import CategoryRoutingUseCase
