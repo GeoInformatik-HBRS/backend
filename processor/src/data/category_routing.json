@@ -28,5 +28,8 @@
     "broken_playground_equipment",
     "damaged_bus_stop",
     "broken_public_toilet"
+  ],
+  "general_department": [
+    "other"
   ]
 }
