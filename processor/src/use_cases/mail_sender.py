@@ -2,6 +2,8 @@ import smtplib
 import logging
 import os
 
+from collections.abc import Callable
+from typing import Any
 from email.message import EmailMessage
 from src.models.attachment import Attachment
 
@@ -11,12 +13,12 @@ class ForwardingError(Exception):
     """Raised when a message could not be forwarded."""
 
 class SendForwardMessageUseCase:
-    def __init__(self, smtp_class=smtplib.SMTP) -> None:
+    def __init__(self, smtp_class: Callable[..., Any] = smtplib.SMTP) -> None:
         self._smtp_class = smtp_class
-    
+
     def execute(self, subject: str, body: str, to: str, attachments: list[Attachment] | None = None) -> None:
-        """Send E-Mail using EmailMessage and smtplib.
-        
+        """Send an email using EmailMessage and smtplib.
+
         Only logging when SMTP_HOST is not set.
         Needs SMTP_HOST, SMTP_PORT and SMTP_FROM from the environment.
         Raises ForwardingError when sending fails.
@@ -33,11 +35,11 @@ class SendForwardMessageUseCase:
 
         # create email message
         msg = EmailMessage()
-    
+
         msg['Subject'] = subject
         msg['To'] = to
         msg['From'] = smtp_from
-    
+
         msg.set_content(body)
 
         # add attachments (pydantic model(filename, data, content_type))
