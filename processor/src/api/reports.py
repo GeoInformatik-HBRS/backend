@@ -1,16 +1,14 @@
 import logging
 
 from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel
 
 from src.use_cases.category_routing import CategoryRoutingUseCase
+from src.models.report import ReportRequest
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
 usecase = CategoryRoutingUseCase()
 
-class ReportRequest(BaseModel):
-    category: str
 
 @router.post("/reports", status_code=204)
 def reports(request: ReportRequest) -> None:
